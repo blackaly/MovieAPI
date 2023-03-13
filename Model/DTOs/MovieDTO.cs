@@ -15,5 +15,5 @@ namespace MovieAPI.Model.DTOs
         public string StoreLine { get; set; }
         public IFormFile Poster { get; set; }
         public byte GenreId { get; set; }
-    }
+    }   
 }
