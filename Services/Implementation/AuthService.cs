@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieAPI.JWT;
@@ -26,10 +25,10 @@ namespace MovieAPI.Services.Implementation
 
         public async Task<AuthModel> Register(RegisterationModel model)
         {
-            if (await _userManager.FindByEmailAsync(model.Email) == null)
+            if (await _userManager.FindByEmailAsync(model.Email) != null)
                 return new AuthModel() { Message = "Email is already exists" };
 
-            if (await _userManager.FindByNameAsync(model.Username) == null)
+            if (await _userManager.FindByNameAsync(model.Username) != null)
                 return new AuthModel() { Message = "Username is already exists" };
 
 
@@ -45,9 +44,7 @@ namespace MovieAPI.Services.Implementation
             if (!res.Succeeded)
             {
                 string errors = string.Empty;
-
-                foreach(var err in res.Errors) errors += err + "\n";
-
+                foreach (var err in res.Errors) errors += err.Code + "\n";
                 return new AuthModel() { Message = errors };
             }
 
@@ -64,6 +61,7 @@ namespace MovieAPI.Services.Implementation
                 Message = string.Empty,
                 Roles = new List<string>() { "User" },
                 Token = new JwtSecurityTokenHandler().WriteToken(token)
+                
             };
 
             return auth;

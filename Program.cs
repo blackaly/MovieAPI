@@ -17,12 +17,15 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 
 // to tell him that we will use the identity in our application
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 // To give the dbContext the connection string
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services
+    .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 // to mapping betwen JwtMapping class and JWT in the json file
-builder.Services.Configure<JwtMapping>(builder.Configuration.GetSection("JWT"));
+builder.Services
+    .Configure<JwtMapping>(builder.Configuration.GetSection("JWT"));
 
 // To add authentication to all controller.
 builder.Services.AddAuthentication(options =>
