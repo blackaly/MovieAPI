@@ -24,7 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 // to mapping betwen JwtMapping class and JWT in the json file
 builder.Services.Configure<JwtMapping>(builder.Configuration.GetSection("JWT"));
 
-
+// To add authentication to all controller.
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,6 +58,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IGenreService, GenreService>();
 builder.Services.AddTransient<IMovieService, MovieService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
