@@ -23,6 +23,34 @@ namespace MovieAPI.Services.Implementation
             _jwt = jwt.Value;
         }
 
+        public async Task<AuthModel> Login(LoginModel model)
+        {
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if(user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                return new AuthModel() { Message = "Password or email is not correct" };
+            }
+
+            var token = await CreateJwtToken(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var auth = new AuthModel()
+            {
+                Email = user.Email,
+                Expiration = token.ValidTo,
+                IsAuthenticated = true,
+                Roles = roles.ToList(),
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Username = user.UserName
+
+            };
+
+            return auth; 
+
+        }
+
         public async Task<AuthModel> Register(RegisterationModel model)
         {
             if (await _userManager.FindByEmailAsync(model.Email) != null)
@@ -66,7 +94,6 @@ namespace MovieAPI.Services.Implementation
 
             return auth;
         }
-
         private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);

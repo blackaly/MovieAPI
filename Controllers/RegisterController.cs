@@ -33,5 +33,19 @@ namespace MovieAPI.Controllers
 
             return Ok(res);
         }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var res = await _authService.Login(model);
+
+            if(!res.IsAuthenticated) return BadRequest(res.Message);
+
+            return Ok(res);
+        }
     }
 }
