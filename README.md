@@ -1,16 +1,16 @@
 # Entities:
 
-- User
-- Movie
-- Series
-- Genre
-- Actor
-- Director
-- Review
-- Rating
-- Watchlist
-- Recommendation
-- Subscription
+- User :heavy_check_mark:
+- Movie :heavy_check_mark:
+- Series :heavy_check_mark:
+- Genre :heavy_check_mark:
+- Actor :heavy_check_mark:
+- Director :heavy_check_mark:
+- Review :heavy_check_mark:
+- Rating :heavy_check_mark:
+- Watchlist :heavy_check_mark:
+- Recommendation :heavy_check_mark:
+- Subscription :heavy_check_mark:
 
 ---
 # Relationships:
