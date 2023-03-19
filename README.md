@@ -16,10 +16,10 @@
 # Relationships:
 
 1. User can have many Watchlists (1 to many relationship) :heavy_check_mark:
-2. Watchlist can have many Movies or Series (many to many relationship)
-3. Movie can have many Genres (many to many relationship)
-4. Series can have many Genres (many to many relationship)
-5. Movie can have many Actors (many to many relationship)
+2. Watchlist can have many Movies or Series (many to many relationship) :heavy_check_mark:
+3. Movie can have many Genres (many to many relationship) :heavy_check_mark:
+4. Series can have many Genres (many to many relationship) :heavy_check_mark:
+5. Movie can have many Actors (many to many relationship) 
 6. Series can have many Actors (many to many relationship)
 7. Movie can have many Directors (many to many relationship)
 8. Series can have many Directors (many to many relationship)
