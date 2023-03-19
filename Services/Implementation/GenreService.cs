@@ -30,7 +30,7 @@ namespace MovieAPI.Services.Implementation
 
         public async Task<IEnumerable<Genre>> GetAll()
         {
-            return await _db.Genres.ToListAsync();
+            return await _db.Genres.AsNoTracking().ToListAsync();
         }
 
         public async Task<Genre> GetGenreById(byte id)
