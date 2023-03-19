@@ -23,9 +23,9 @@
 6. Series can have many Actors (many to many relationship) :heavy_check_mark:
 7. Movie can have many Directors (many to many relationship) :heavy_check_mark:
 8. Series can have many Directors (many to many relationship) :heavy_check_mark:
-9. User can write many Reviews (1 to many relationship)
-10. Movie can have many Reviews (1 to many relationship)
-11. Series can have many Reviews (1 to many relationship)
+9. User can write many Reviews (1 to many relationship) :heavy_check_mark:
+10. Movie can have many Reviews (1 to many relationship) :heavy_check_mark:
+11. Series can have many Reviews (1 to many relationship) :heavy_check_mark:
 12. User can rate many Movies and Series (many to many relationship)
 13. Movie can have many Ratings (1 to many relationship)
 14. Series can have many Ratings (1 to many relationship)
