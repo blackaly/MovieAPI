@@ -15,7 +15,7 @@
 ---
 # Relationships:
 
-1. User can have many Watchlists (1 to many relationship)
+1. User can have many Watchlists (1 to many relationship) :heavy_check_mark:
 2. Watchlist can have many Movies or Series (many to many relationship)
 3. Movie can have many Genres (many to many relationship)
 4. Series can have many Genres (many to many relationship)

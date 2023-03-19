@@ -19,8 +19,7 @@ namespace MovieAPI.Model.Domains
         public string StoreLine { get; set; }
         public byte[] Poster { get; set; }
         public byte GenreId { get; set; }
-        [JsonIgnore]
-        public HashSet<Genre> Genres { get; set; }
         public ICollection<WatchListMoviesSeries> WatchListMoviesSeries { get; set; }
+        ICollection<MovieGenreies> MovieGenreies { get; set; }
     }
 }
