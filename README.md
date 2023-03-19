@@ -11,9 +11,9 @@
 - Watchlist
 - Recommendation
 - Subscription
-- Relationships:
 
 ---
+# Relationships:
 
 1. User can have many Watchlists (1 to many relationship)
 2. Watchlist can have many Movies or Series (many to many relationship)
