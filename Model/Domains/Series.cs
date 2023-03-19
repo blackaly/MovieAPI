@@ -16,5 +16,6 @@ namespace MovieAPI.Model.Domains
         public string ProductionStudio { get; set; }
         public decimal Budget { get; set; }
         public decimal BoxOfficeRevenue { get; set; }
+        public ICollection<WatchListMoviesSeries> WatchListMoviesSeries { get; set; }
     }
 }

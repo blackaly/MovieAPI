@@ -21,5 +21,6 @@ namespace MovieAPI.Model.Domains
         public byte GenreId { get; set; }
         [JsonIgnore]
         public HashSet<Genre> Genres { get; set; }
+        public ICollection<WatchListMoviesSeries> WatchListMoviesSeries { get; set; }
     }
 }
