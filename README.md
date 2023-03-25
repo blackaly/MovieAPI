@@ -26,9 +26,9 @@
 9. User can write many Reviews (1 to many relationship) :heavy_check_mark:
 10. Movie can have many Reviews (1 to many relationship) :heavy_check_mark:
 11. Series can have many Reviews (1 to many relationship) :heavy_check_mark:
-12. User can rate many Movies and Series (many to many relationship)
-13. Movie can have many Ratings (1 to many relationship)
-14. Series can have many Ratings (1 to many relationship)
+12. User can rate many Movies and Series (many to many relationship) :heavy_check_mark:
+13. Movie can have many Ratings (1 to many relationship) :heavy_check_mark:
+14. Series can have many Ratings (1 to many relationship) :heavy_check_mark:
 15. User can make many Recommendations (1 to many relationship)
 16. Movie can have many Recommendations (1 to many relationship)
 17. Series can have many Recommendations (1 to many relationship)

@@ -20,6 +20,6 @@ namespace MovieAPI.Model.Domains
         public byte[] Poster { get; set; }
         public byte GenreId { get; set; }
         public ICollection<WatchListMoviesSeries> WatchListMoviesSeries { get; set; }
-        ICollection<MovieGenreies> MovieGenreies { get; set; }
+        ICollection<MovieGenres> MovieGenreies { get; set; }
     }
 }

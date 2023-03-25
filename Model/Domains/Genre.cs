@@ -12,6 +12,6 @@ namespace MovieAPI.Model.Domains
         [MaxLength(100, ErrorMessage = "You have exceeded the max length")]
         public string Name { get; set; }
 
-        ICollection<MovieGenreies> MovieGenreies { get; set; }
+        ICollection<MovieGenres> MovieGenreies { get; set; }
     }
 }
