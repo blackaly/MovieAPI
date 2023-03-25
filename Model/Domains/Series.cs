@@ -1,5 +1,6 @@
 ﻿using NuGet.DependencyResolver;
 using System.Security.Policy;
+using System.Text.Json.Serialization;
 
 namespace MovieAPI.Model.Domains
 {
@@ -16,7 +17,9 @@ namespace MovieAPI.Model.Domains
         public string ProductionStudio { get; set; }
         public decimal Budget { get; set; }
         public decimal BoxOfficeRevenue { get; set; }
+        [JsonIgnore]
         public ICollection<WatchListMoviesSeries>? WatchListMoviesSeries { get; set; }
+        [JsonIgnore]
         public ICollection<Eposide>? Eposides{ get; set; }
     }
 }

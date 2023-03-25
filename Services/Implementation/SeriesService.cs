@@ -40,9 +40,15 @@ namespace MovieAPI.Services.Implementation
             return await _context.Series.Include(x => x.Eposides).ToListAsync(); 
         }
 
-        public Task<Series> GetBy<T>(T param)
+        public async Task<Series> GetBy(int id)
         {
-            throw new NotImplementedException();
+
+            return await _context.Series.AsNoTracking().FirstOrDefaultAsync(x => x.SeriesId == id);
+        }
+
+        public IEnumerable<Series> GetBy(string name)
+        {
+            return  _context.Series.AsNoTracking().Where(x => x.Title.ToLower().Contains(name.ToLower()));
         }
 
         public Task<IEnumerable<Series>> GetSeriesWithItsEposides(int id)

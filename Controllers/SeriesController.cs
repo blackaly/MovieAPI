@@ -4,6 +4,7 @@ using MovieAPI.Model.Domains;
 using MovieAPI.Model.DTOs;
 using MovieAPI.Services.Interfaces;
 using System.Diagnostics.Metrics;
+using System.Runtime.Remoting;
 
 namespace MovieAPI.Controllers
 {
@@ -22,6 +23,20 @@ namespace MovieAPI.Controllers
         public async Task<IActionResult> GetAllSeries()
         {
             var obj = await seriesService.GetAll();
+            return Ok(obj);
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetSeriesBy(int id)
+        {
+            var obj = await seriesService.GetBy(id);
+            return Ok(obj);
+        }
+
+        [HttpGet("name")]
+        public IActionResult GetSeriesBy(string title)
+        {
+            var obj = seriesService.GetBy(title);
             return Ok(obj);
         }
 

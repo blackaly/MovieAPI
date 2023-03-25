@@ -11,6 +11,8 @@ namespace MovieAPI.Services.Interfaces
         Task<Series> AddWithEposides(Series series);
         Task<Series> EditSeries(int id, Series series);
         Task<bool> IsSeriesExists<T>(T param);
-        Task<Series> GetBy<T>(T param);
+        Task<Series> GetBy(int id);
+        IEnumerable<Series> GetBy(string name);
+
     }
 }
