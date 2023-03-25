@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MovieAPI.Model.Domains;
 using MovieAPI.Model.DTOs;
 using MovieAPI.Services.Interfaces;
 using System.Diagnostics.Metrics;
+using System.Drawing.Drawing2D;
 using System.Runtime.Remoting;
 
 namespace MovieAPI.Controllers
@@ -13,16 +15,36 @@ namespace MovieAPI.Controllers
     public class SeriesController : ControllerBase
     {
         private readonly ISeriesService seriesService;
-
-        public SeriesController(ISeriesService seriesService)
+        private IWebHostEnvironment _webHostEnvironment;
+        public SeriesController(ISeriesService seriesService, IWebHostEnvironment webHostEnvironment)
         {
             this.seriesService = seriesService;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllSeries()
         {
             var obj = await seriesService.GetAll();
+            
+            if(obj != null)
+            {
+
+                foreach(var o in obj)
+                {
+                    if (o.PosterImage.IsNullOrEmpty()) continue;
+                    var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", o.PosterImage);
+                    MemoryStream s = new MemoryStream();
+                    using FileStream f = new FileStream(path, FileMode.Open);
+                    f.CopyTo(s);
+                    s.Position = 0;
+                    o.PosterImage = Convert.ToBase64String(s.ToArray());
+                    Response.SendFileAsync(s.ToArray());
+                }
+
+                return Ok(obj);
+            }
+
             return Ok(obj);
         }
 
@@ -41,16 +63,18 @@ namespace MovieAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSeries(SeriesDTO model)
+        public async Task<IActionResult> CreateSeries([FromForm]SeriesDTO model)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
+
+            var fakeFile = Path.GetRandomFileName(); 
 
             var series = new Series()
             {
                 BoxOfficeRevenue = model.BoxOfficeRevenue,
                 Budget = model.Budget,
                 Language = model.Language,
-                PosterImage = model.PosterImage,
+                PosterImage = fakeFile,
                 ProductionStudio = model.ProductionStudio,
                 ReleaseYear = model.ReleaseYear,
                 RuntimeperEpisode = model.RuntimeperEpisode,
@@ -59,6 +83,9 @@ namespace MovieAPI.Controllers
                 TrailerVideoURL = model.TrailerVideoURL
             };
 
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", fakeFile);
+            using FileStream f = new FileStream(path, FileMode.Create);
+            model.PosterImage.CopyTo(f);
             await seriesService.Add(series);
 
             return Ok(series);
