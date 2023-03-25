@@ -83,7 +83,8 @@ namespace MovieAPI.Controllers
             series.Eposides= eposides;
 
             await seriesService.Add(series);
-            return Ok(series);
+            return Ok();
         }
+
     }
 }

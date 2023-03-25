@@ -37,7 +37,7 @@ namespace MovieAPI.Services.Implementation
 
         public async Task<IEnumerable<Series>> GetAll()
         {
-            return await _context.Series.ToListAsync(); 
+            return await _context.Series.Include(x => x.Eposides).ToListAsync(); 
         }
 
         public Task<Series> GetBy<T>(T param)
