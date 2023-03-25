@@ -42,7 +42,6 @@ namespace MovieAPI.Controllers
                     
                 }
 
-                return Ok(obj);
             }
 
             return Ok(obj);
