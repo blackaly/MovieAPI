@@ -16,7 +16,7 @@ namespace MovieAPI.Model.Domains
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
         [MaxLength(1000, ErrorMessage="You have exceeded the discription limit length")]
-        public string StoreLine { get; set; }
+        public string? StoreLine { get; set; }
         public byte[] Poster { get; set; }
         public byte GenreId { get; set; }
         public ICollection<WatchListMoviesSeries> WatchListMoviesSeries { get; set; }
