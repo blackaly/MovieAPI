@@ -9,6 +9,7 @@ using MovieAPI.Model.Domains;
 using MovieAPI.Services.Implementation;
 using MovieAPI.Services.Interfaces;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,11 @@ builder.Services
 // to mapping betwen JwtMapping class and JWT in the json file
 builder.Services
     .Configure<JwtMapping>(builder.Configuration.GetSection("JWT"));
+
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 
 // To add authentication to all controller.
 builder.Services.AddAuthentication(options =>
@@ -59,9 +65,13 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddTransient<IGenreService, GenreService>();
 builder.Services.AddTransient<IMovieService, MovieService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<ISeriesService, SeriesService>();
+builder.Services.AddTransient<IEposideService, EposideService>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

@@ -1,11 +1,7 @@
-﻿using NuGet.DependencyResolver;
-using System.Security.Policy;
-
-namespace MovieAPI.Model.Domains
+﻿namespace MovieAPI.Model.DTOs
 {
-    public class Series
+    public class SeriesWithEposideDTO
     {
-        public int SeriesId { get; set; }
         public string Title { get; set; }
         public DateTime ReleaseYear { get; set; }
         public string Synopsis { get; set; }
@@ -16,7 +12,6 @@ namespace MovieAPI.Model.Domains
         public string ProductionStudio { get; set; }
         public decimal Budget { get; set; }
         public decimal BoxOfficeRevenue { get; set; }
-        public ICollection<WatchListMoviesSeries>? WatchListMoviesSeries { get; set; }
-        public ICollection<Eposide>? Eposides{ get; set; }
+        public ICollection<EposideDTO> Eposides { get; set; }
     }
 }

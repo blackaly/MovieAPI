@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieAPI.Model;
 
@@ -11,9 +12,11 @@ using MovieAPI.Model;
 namespace MovieAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230325203415_newdomains")]
+    partial class newdomains
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,34 +295,6 @@ namespace MovieAPI.Migrations
                     b.HasKey("DirectorId");
 
                     b.ToTable("Directors");
-                });
-
-            modelBuilder.Entity("MovieAPI.Model.Domains.Eposide", b =>
-                {
-                    b.Property<int>("EposideId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EposideId"));
-
-                    b.Property<string>("EposideDiscription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EposideImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EposideName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SeriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EposideId");
-
-                    b.HasIndex("SeriesId");
-
-                    b.ToTable("Eposide");
                 });
 
             modelBuilder.Entity("MovieAPI.Model.Domains.Genre", b =>
@@ -650,17 +625,6 @@ namespace MovieAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieAPI.Model.Domains.Eposide", b =>
-                {
-                    b.HasOne("MovieAPI.Model.Domains.Series", "Series")
-                        .WithMany("Eposides")
-                        .HasForeignKey("SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Series");
-                });
-
             modelBuilder.Entity("MovieAPI.Model.Domains.Rating", b =>
                 {
                     b.HasOne("MovieAPI.Model.Domains.ApplicationUser", "ApplicationUser")
@@ -752,8 +716,6 @@ namespace MovieAPI.Migrations
 
             modelBuilder.Entity("MovieAPI.Model.Domains.Series", b =>
                 {
-                    b.Navigation("Eposides");
-
                     b.Navigation("WatchListMoviesSeries");
                 });
 
