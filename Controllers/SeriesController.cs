@@ -39,7 +39,7 @@ namespace MovieAPI.Controllers
                     f.CopyTo(s);
                     s.Position = 0;
                     o.PosterImage = Convert.ToBase64String(s.ToArray());
-                    Response.SendFileAsync(s.ToArray());
+                    
                 }
 
                 return Ok(obj);
