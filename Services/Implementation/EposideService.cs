@@ -32,18 +32,22 @@ namespace MovieAPI.Services.Implementation
             
         }
 
-        public Task<Eposide> EditSeries(int id, Eposide eposide)
+        public async Task EditEposide(Eposide eposide)
         {
-
-            throw new NotImplementedException();
+            _context.Entry(eposide).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
-
         public async Task<IEnumerable<Eposide>> GetAll()
         {
             return await _context.Eposides.ToListAsync();
         }
 
-        public Task<Eposide> GetBy<T>(T param)
+        public async Task<Eposide> GetBy(int id)
+        {
+            return await _context.Eposides.FindAsync(id);
+        }
+
+        public IEnumerable<Eposide> GetBy(string name)
         {
             throw new NotImplementedException();
         }
@@ -58,9 +62,5 @@ namespace MovieAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsSeriesExists<T>(T param)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

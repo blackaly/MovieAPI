@@ -19,7 +19,6 @@ namespace MovieAPI.Model.Domains
         public decimal BoxOfficeRevenue { get; set; }
         [JsonIgnore]
         public ICollection<WatchListMoviesSeries>? WatchListMoviesSeries { get; set; }
-        [JsonIgnore]
         public ICollection<Eposide>? Eposides{ get; set; }
     }
 }

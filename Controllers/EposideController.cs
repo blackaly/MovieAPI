@@ -34,6 +34,9 @@ namespace MovieAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEposide(int id, List<EposideDTO> eposides)
         {
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             List<Eposide> ep = new List<Eposide>();
             var fakeFile = Path.GetRandomFileName();
             foreach (var o in eposides)
@@ -56,6 +59,29 @@ namespace MovieAPI.Controllers
             await _eposideService.Add(id, ep);
 
             return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditEposide(int id, EposideDTO eposide)
+        {
+            var obj = await _eposideService.GetBy(id);
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            obj.EposideDiscription = eposide.EposideDiscription;
+            obj.SeriesId = eposide.SeriesId;
+            obj.EposideName = eposide.EposideName;
+
+            try
+            {
+                await _eposideService.EditEposide(obj);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

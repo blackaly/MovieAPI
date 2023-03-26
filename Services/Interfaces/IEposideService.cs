@@ -8,8 +8,8 @@ namespace MovieAPI.Services.Interfaces
         Task<IEnumerable<Eposide>> GetEposideWithSeries(int id);
         Task<IEnumerable<Eposide>> GetEposideWithSeriesName(string name);
         Task<IEnumerable<Eposide>> Add(int id, List<Eposide> eposide);
-        Task<Eposide> EditSeries(int id, Eposide eposide);
-        Task<bool> IsSeriesExists<T>(T param);
-        Task<Eposide> GetBy<T>(T param);
+        Task EditEposide(Eposide eposide);
+        Task<Eposide> GetBy(int id);
+        IEnumerable<Eposide> GetBy(string name);
     }
 }
