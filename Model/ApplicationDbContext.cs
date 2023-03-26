@@ -18,5 +18,6 @@ namespace MovieAPI.Model
         public DbSet<Series> Series { get; set; }
         public DbSet<Watchlist> Watchlists { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<Eposide> Eposides{ get; set; }
     }
 }

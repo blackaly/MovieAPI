@@ -6,7 +6,7 @@ namespace MovieAPI.Model.DTOs
     {
         public string EposideName { get; set; }
         public string? EposideDiscription { get; set; }
-        public string? EposideImageUrl { get; set; }
-        public int? SeriesId { get; set; }
+        public IFormFile? EposideImageUrl { get; set; }
+        public int SeriesId { get; set; }
     }
 }

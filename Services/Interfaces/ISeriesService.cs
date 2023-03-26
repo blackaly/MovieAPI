@@ -4,7 +4,7 @@ namespace MovieAPI.Services.Interfaces
 {
     public interface ISeriesService
     {
-        Task<IEnumerable<Series>> GetAll();
+        Task<List<Series>> GetAll();
         Task<IEnumerable<Series>> GetSeriesWithItsEposides(int id);
         Task<IEnumerable<Series>> GetSeriesWithItsEposidesName(string name);
         Task<Series> Add(Series series);

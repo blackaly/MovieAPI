@@ -8,11 +8,9 @@ namespace MovieAPI.Services.Implementation
     public class SeriesService : ISeriesService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IEposideService eposideService;
-        public SeriesService(ApplicationDbContext context, IEposideService eposideService)
+        public SeriesService(ApplicationDbContext context)
         {
             _context = context;
-            this.eposideService = eposideService;
         }
 
         public async Task<Series> Add(Series series)
@@ -35,7 +33,7 @@ namespace MovieAPI.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Series>> GetAll()
+        public async Task<List<Series>> GetAll()
         {
             return await _context.Series.Include(x => x.Eposides).ToListAsync(); 
         }

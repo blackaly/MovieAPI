@@ -95,6 +95,8 @@ namespace MovieAPI.Controllers
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
+            var fakeFile = Path.GetRandomFileName();
+
             var series = new Series()
             {
                 BoxOfficeRevenue = model.BoxOfficeRevenue,
@@ -109,14 +111,16 @@ namespace MovieAPI.Controllers
                 TrailerVideoURL = model.TrailerVideoURL
             };
 
-            var eposides = new List<Eposide>(); 
+            var eposides = new List<Eposide>();
 
-            foreach(var item in model.Eposides)
+            fakeFile = Path.GetRandomFileName();
+
+            foreach (var item in model.Eposides)
             {
                 eposides.Add(new Eposide()
                 {
                     EposideDiscription = item.EposideDiscription,
-                    EposideImageUrl = item.EposideImageUrl,
+                    EposideImageUrl = fakeFile,
                     EposideName = item.EposideName
                 });
             }
