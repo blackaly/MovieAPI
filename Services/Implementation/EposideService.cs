@@ -49,7 +49,7 @@ namespace MovieAPI.Services.Implementation
 
         public IEnumerable<Eposide> GetBy(string name)
         {
-            throw new NotImplementedException();
+            return  _context.Eposides.Where(x => x.EposideName.ToLower().Contains(name.ToLower()));
         }
 
         public Task<IEnumerable<Eposide>> GetEposideWithSeries(int id)

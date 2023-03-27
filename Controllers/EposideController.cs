@@ -95,12 +95,10 @@ namespace MovieAPI.Controllers
         }
 
         [HttpGet("ByName")]
-        public async Task<IActionResult> GetEposideyName(string name)
+        public  IActionResult GetEposideyName(string name)
         {
             var obj =  _eposideService.GetBy(name);
-
             if (obj.Count() <= 0) return NoContent();
-
             return Ok(obj);
         }
     }
