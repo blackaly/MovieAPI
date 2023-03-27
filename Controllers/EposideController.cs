@@ -83,5 +83,25 @@ namespace MovieAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("ById")]
+        public async Task<IActionResult> GetEposideyId(int id)
+        {
+            var obj = await _eposideService.GetBy(id);
+
+            if (obj == null) return NoContent();
+
+            return Ok(obj);
+        }
+
+        [HttpGet("ByName")]
+        public async Task<IActionResult> GetEposideyName(string name)
+        {
+            var obj =  _eposideService.GetBy(name);
+
+            if (obj.Count() <= 0) return NoContent();
+
+            return Ok(obj);
+        }
     }
 }
