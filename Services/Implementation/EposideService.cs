@@ -52,14 +52,14 @@ namespace MovieAPI.Services.Implementation
             return  _context.Eposides.Where(x => x.EposideName.ToLower().Contains(name.ToLower()));
         }
 
-        public Task<IEnumerable<Eposide>> GetEposideWithSeries(int id)
+        public IEnumerable<Eposide> GetEposideWithSeriesiD(int id)
         {
-            throw new NotImplementedException();
+            return _context.Eposides.Where(x => x.SeriesId == id);
         }
 
-        public Task<IEnumerable<Eposide>> GetEposideWithSeriesName(string name)
+        public IEnumerable<Eposide> GetEposideWithSeriesName(string name)
         {
-            throw new NotImplementedException();
+            return _context.Eposides.Where(x => x.Series.Title.ToLower().Contains(name.ToLower()));
         }
 
     }

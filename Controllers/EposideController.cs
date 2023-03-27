@@ -101,5 +101,22 @@ namespace MovieAPI.Controllers
             if (obj.Count() <= 0) return NoContent();
             return Ok(obj);
         }
+
+        [HttpGet("BySeriesId")]
+        public IActionResult GetEposideBySeriesId(int id)
+        {
+            var obj = _eposideService.GetEposideWithSeriesiD(id);
+            if(obj.Count() <= 0) return NoContent();
+            return Ok(obj);
+        }
+
+
+        [HttpGet("BySeriesName")]
+        public IActionResult GetEposideBySeriesName(string name)
+        {
+            var obj = _eposideService.GetEposideWithSeriesName(name);
+            if (obj.Count() <= 0) return NoContent();
+            return Ok(obj);
+        }
     }
 }
