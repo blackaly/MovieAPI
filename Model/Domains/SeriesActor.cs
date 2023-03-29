@@ -2,6 +2,7 @@
 {
     public class SeriesActor
     {
+        public int SeriesActorId { get; set; }
         public int SeriesId { get; set; }
         public virtual Series Series { get; set; } 
         public int ActorId { get; set; }
