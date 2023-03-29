@@ -68,9 +68,35 @@ namespace MovieAPI.Controllers
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            obj.EposideDiscription = eposide.EposideDiscription;
-            obj.SeriesId = eposide.SeriesId;
-            obj.EposideName = eposide.EposideName;
+            if(!string.IsNullOrEmpty(eposide.EposideDiscription))
+                obj.EposideDiscription = eposide.EposideDiscription;
+            
+            if(eposide.SeriesId != 0)
+                obj.SeriesId = eposide.SeriesId;
+            
+            if(!string.IsNullOrEmpty(eposide.EposideName))
+                obj.EposideName = eposide.EposideName;
+
+            if (!string.IsNullOrEmpty(eposide.EposideImageUrl?.FileName))
+            {
+                try
+                {
+                    var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", obj.EposideImageUrl);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    var fake = Path.GetRandomFileName();
+
+
+                    obj.EposideImageUrl = fake;
+                    using FileStream f = new FileStream(path, FileMode.Create);
+                    eposide.EposideImageUrl.CopyTo(f);
+
+                }
+                catch(IOException EX) { return BadRequest(EX); }
+            }
 
             try
             {
