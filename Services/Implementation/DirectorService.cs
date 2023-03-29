@@ -44,14 +44,14 @@ namespace MovieAPI.Services.Implementation
 
         public IEnumerable<Director> GetSeriesDirectors(int id)
         {
-            
-
-            throw new NotImplementedException();
+            return (IEnumerable<Director>)_context.SeriesDirectors.Where(x => x.DirectorId == id).Include(y => y.Director);
         }
 
         public IEnumerable<Director> GetSeriesDirectors(string name)
         {
-            throw new NotImplementedException();
+            return (IEnumerable<Director>)_context.SeriesDirectors.Where(x => string
+            .Concat(x.Director.FirstName, " ", x.Director.LastName).ToLower()
+            .Contains(name.ToLower())).Include(y => y.Director);
         }
     }
 }

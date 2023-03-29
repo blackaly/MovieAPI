@@ -71,6 +71,7 @@ builder.Services.AddTransient<IMovieService, MovieService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ISeriesService, SeriesService>();
 builder.Services.AddTransient<IEposideService, EposideService>();
+builder.Services.AddTransient<IDirectorService, DirectorService>();
 
 builder.Services.AddSwaggerGen();
 
