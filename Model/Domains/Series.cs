@@ -20,5 +20,6 @@ namespace MovieAPI.Model.Domains
         [JsonIgnore]
         public ICollection<WatchListMoviesSeries>? WatchListMoviesSeries { get; set; }
         public ICollection<Eposide>? Eposides{ get; set; }
+        public ICollection<SeriesDirectors>? SeriesDirectors { get; set; }
     }
 }

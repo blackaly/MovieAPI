@@ -9,5 +9,6 @@
         public string? Country { get; set; }
         public string? ProfilePicture { get; set; }
         public string? Bio { get; set; }
+        public ICollection<SeriesDirectors> SeriesDirectors { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace MovieAPI.Controllers
                     SeriesId = o.SeriesId
                 });
 
-                if (!string.IsNullOrEmpty(o.EposideImageUrl))
+                if (!string.IsNullOrEmpty(o.EposideImageUrl.FileName))
                 {
                     var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", fakeFile);
                     using FileStream f = new FileStream(path, FileMode.Create);
