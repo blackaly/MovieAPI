@@ -29,10 +29,10 @@
 12. User can rate many Movies and Series (many to many relationship) :heavy_check_mark:
 13. Movie can have many Ratings (1 to many relationship) :heavy_check_mark:
 14. Series can have many Ratings (1 to many relationship) :heavy_check_mark:
-15. User can make many Recommendations (1 to many relationship)
-16. Movie can have many Recommendations (1 to many relationship)
-17. Series can have many Recommendations (1 to many relationship)
-18. User can have many Subscriptions (1 to many relationship)
+15. User can make many Recommendations (1 to many relationship) :hourglass:
+16. Movie can have many Recommendations (1 to many relationship) :hourglass:
+17. Series can have many Recommendations (1 to many relationship) :hourglass:
+18. User can have many Subscriptions (1 to many relationship) :hourglass:
 
 ---
 
