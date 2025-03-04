@@ -91,7 +91,7 @@ namespace MovieAPI.Controllers
         }
 
         [HttpPost("Eposide")]
-        public async Task<IActionResult> CreateSeriesWithEposide(SeriesWithEposideDTO model)
+        public async Task<IActionResult> CreateSeriesWithEposide([FromForm] SeriesWithEposideDTO model)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 

@@ -32,10 +32,23 @@ namespace MovieAPI.Services.Implementation
             
         }
 
-        public async Task EditEposide(Eposide eposide)
+        public async Task<Eposide> Add(int id, Eposide eposide)
+        {
+            var obj = await _seriesService.GetBy(id);
+
+            if (obj == null) return null;
+
+            await _context.Eposides.AddAsync(eposide);
+
+            await _context.SaveChangesAsync();
+            return eposide;
+        }
+
+        public async Task<Eposide> EditEposide(Eposide eposide)
         {
             _context.Entry(eposide).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return eposide;
         }
         public async Task<IEnumerable<Eposide>> GetAll()
         {

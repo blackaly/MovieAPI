@@ -53,7 +53,7 @@ namespace MovieAPI.Controllers
 
         [HttpPut]
 
-        public async Task<IActionResult> PutGenereAsync(byte id, GenresDTO dto)
+        public async Task<IActionResult> PutGenereAsync([FromQuery] byte id, [FromBody] GenresDTO dto)
         {
             if (dto == null) return NoContent();
             var obj = await _genreService.GetGenreById(id);
@@ -75,7 +75,7 @@ namespace MovieAPI.Controllers
         }
 
         [Route("genreExists")]
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> GenereExists(string name)
         {
             if (name.IsNullOrEmpty()) return BadRequest();

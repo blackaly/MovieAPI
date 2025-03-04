@@ -41,12 +41,12 @@ namespace MovieAPI.Services.Implementation
         public async Task<Series> GetBy(int id)
         {
 
-            return await _context.Series.AsNoTracking().FirstOrDefaultAsync(x => x.SeriesId == id);
+            return await _context.Series.AsNoTracking().Include(x => x.Eposides).FirstOrDefaultAsync(x => x.SeriesId == id);
         }
 
         public IEnumerable<Series> GetBy(string name)
         {
-            return  _context.Series.AsNoTracking().Where(x => x.Title.ToLower().Contains(name.ToLower()));
+            return  _context.Series.AsNoTracking().Include(x => x.Eposides).Where(x => x.Title.ToLower().Contains(name.ToLower()));
         }
 
         public Task<IEnumerable<Series>> GetSeriesWithItsEposides(int id)

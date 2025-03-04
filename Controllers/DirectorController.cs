@@ -55,9 +55,9 @@ namespace MovieAPI.Controllers
 
             try
             {
-                await _directorService.Add(d);
+                var output = await _directorService.Add(d);
 
-                return Ok(model);
+                return Ok(output);
             }
             catch (Exception e)
             {

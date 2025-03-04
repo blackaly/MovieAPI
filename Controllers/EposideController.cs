@@ -32,6 +32,7 @@ namespace MovieAPI.Controllers
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
         public async Task<IActionResult> CreateEposide(int id, List<EposideDTO> eposides)
         {
 
@@ -61,12 +62,41 @@ namespace MovieAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> EditEposide(int id, EposideDTO eposide)
+        [HttpPost("single")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateEposideOneByOne([FromQuery] int id, [FromForm]EposideDTO eposides)
         {
-            var obj = await _eposideService.GetBy(id);
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            Eposide ep = new Eposide();
+            var fakeFile = Path.GetRandomFileName();
+
+            ep.EposideDiscription = eposides.EposideDiscription;
+            ep.EposideImageUrl = fakeFile;
+            ep.EposideName = eposides.EposideName;
+            ep.SeriesId = id;
+               
+
+                if (!string.IsNullOrEmpty(eposides.EposideImageUrl.FileName))
+                {
+                    var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", fakeFile);
+                    using FileStream f = new FileStream(path, FileMode.Create);
+                eposides.EposideImageUrl.CopyTo(f);
+                }
+            var output = await _eposideService.Add(id, ep);
+            if(output != null)
+                return Ok(output);
+            return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditEposide([FromQuery]int id, [FromForm]EposideDTO eposide)
+        {
+            try
+            {
+                var obj = await _eposideService.GetBy(id);
+                if (!ModelState.IsValid) return BadRequest("There is no eposide with this id");
 
             if(!string.IsNullOrEmpty(eposide.EposideDiscription))
                 obj.EposideDiscription = eposide.EposideDiscription;
@@ -79,8 +109,7 @@ namespace MovieAPI.Controllers
 
             if (!string.IsNullOrEmpty(eposide.EposideImageUrl?.FileName))
             {
-                try
-                {
+
                     var path = Path.Combine(_webHostEnvironment.WebRootPath, "Uploads", obj.EposideImageUrl);
                     if (System.IO.File.Exists(path))
                     {
@@ -93,21 +122,19 @@ namespace MovieAPI.Controllers
                     obj.EposideImageUrl = fake;
                     using FileStream f = new FileStream(path, FileMode.Create);
                     eposide.EposideImageUrl.CopyTo(f);
-
-                }
-                catch(IOException EX) { return BadRequest(EX); }
+                
             }
 
-            try
+
+                var output = await _eposideService.EditEposide(obj);
+
+                return Ok(output);
+            }catch(Exception error)
             {
-                await _eposideService.EditEposide(obj);
+                return BadRequest(error.Message);
+            }
 
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
         }
 
         [HttpGet("ById")]
