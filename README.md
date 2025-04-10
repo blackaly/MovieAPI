@@ -1,46 +1,90 @@
-# Entities:
+# MovieAPI
 
-- User :heavy_check_mark:
-- Movie :heavy_check_mark:
-- Series :heavy_check_mark:
-- Genre :heavy_check_mark:
-- Actor :heavy_check_mark:
-- Director :heavy_check_mark:
-- Review :heavy_check_mark:
-- Rating :heavy_check_mark:
-- Watchlist :heavy_check_mark:
-- Recommendation :heavy_check_mark:
-- Subscription :heavy_check_mark:
+A comprehensive RESTful API for managing movies, TV series, actors, directors, and related entertainment data.
 
----
-# Relationships:
+## Overview
 
-1. User can have many Watchlists (1 to many relationship) :heavy_check_mark:
-2. Watchlist can have many Movies or Series (many to many relationship) :heavy_check_mark:
-3. Movie can have many Genres (many to many relationship) :heavy_check_mark:
-4. Series can have many Genres (many to many relationship) :heavy_check_mark:
-5. Movie can have many Actors (many to many relationship) :heavy_check_mark:
-6. Series can have many Actors (many to many relationship) :heavy_check_mark:
-7. Movie can have many Directors (many to many relationship) :heavy_check_mark:
-8. Series can have many Directors (many to many relationship) :heavy_check_mark:
-9. User can write many Reviews (1 to many relationship) :heavy_check_mark:
-10. Movie can have many Reviews (1 to many relationship) :heavy_check_mark:
-11. Series can have many Reviews (1 to many relationship) :heavy_check_mark:
-12. User can rate many Movies and Series (many to many relationship) :heavy_check_mark:
-13. Movie can have many Ratings (1 to many relationship) :heavy_check_mark:
-14. Series can have many Ratings (1 to many relationship) :heavy_check_mark:
-15. User can make many Recommendations (1 to many relationship) :hourglass:
-16. Movie can have many Recommendations (1 to many relationship) :hourglass:
-17. Series can have many Recommendations (1 to many relationship) :hourglass:
-18. User can have many Subscriptions (1 to many relationship) :hourglass:
+MovieAPI is an ASP.NET Core-based backend solution that offers a complete set of endpoints for handling entertainment content. The project implements domain-driven design principles with proper separation of concerns using a clean architecture approach.
 
----
+## Features
 
-* A User can have many Watchlists. Each Watchlist is a collection of Movies or Series that the user wants to watch.
-* A Watchlist can contain many Movies or Series, and each Movie or Series can be in many Watchlists.
-* Each Movie can have many Genres, and each Genre can be associated with many Movies.
-* Each Series can have many Genres, and each Genre can be associated with many Series.
-* Each Movie can have many Actors, and each Actor can be associated with many Movies.
-* Each Series can have many Actors, and each Actor can be associated with many Series.
-* Each Movie can have many Directors, and each Director can be associated with many Movies.
-* Each Series can have many Directors, and each Director can be associated with
+- Complete CRUD operations for movies, TV series, episodes, actors, and directors
+- JWT-based authentication for secure API access
+- Rich relationship modeling between entertainment entities:
+  - Movies and their actors/directors
+  - TV series, seasons, episodes, and cast members
+  - Genre classifications
+- User-specific watchlists and recommendations
+- Rating and review system
+- Swagger documentation for API testing and exploration
+
+## Architecture
+
+The solution is organized into four main projects:
+
+- **MovieAPI.Domain**: Core business entities, interfaces, and the Result pattern implementation
+- **MovieAPI.Application**: Application services, DTOs, and business logic
+- **MovieAPI.Infrastructure**: Data access, repositories, and external service implementations
+- **MovieAPI.API**: Controllers, filters, and API configuration
+
+## Key Relationships
+
+- Movies can have multiple actors and directors (many-to-many)
+- Series can have multiple episodes, actors, and directors
+- Users can create watchlists containing movies and series
+- Content can be categorized with multiple genres
+- Users can rate and review movies and series
+
+## Getting Started
+
+### Prerequisites
+
+- .NET 9.0 SDK
+- SQL Server (LocalDB or full instance)
+- Visual Studio or another IDE
+
+### Installation
+
+1. Clone the repository
+2. Update the connection string in `appsettings.json` if needed
+3. Run the application using:
+   ```
+   dotnet run --project src/MovieAPI.API
+   ```
+4. Access the API at:
+   - HTTP: http://localhost:5000
+   - HTTPS: https://localhost:5001
+5. Browse Swagger documentation at `/swagger`
+
+## API Endpoints
+
+The API provides endpoints for managing:
+
+- Authentication (register, login)
+- Movies with filtering and search
+- Series and their episodes
+- Actors and directors
+- User watchlists and preferences
+- Ratings and reviews
+
+## Technology Stack
+
+- ASP.NET Core 9.0
+- Entity Framework Core with SQL Server
+- JWT authentication
+- Swagger/OpenAPI for documentation
+- Result pattern for standardized responses
+
+## Development Notes
+
+- Repository pattern is used for data access
+- Services follow a uniform interface pattern
+- JWT configuration is stored in appsettings.json
+- Dependency Injection is used throughout the application
+
+## Future Enhancements
+
+- Recommendation engine based on user preferences
+- Advanced search and filtering
+- Performance optimizations for large datasets
+- Media file storage and streaming 
